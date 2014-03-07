@@ -23,6 +23,7 @@
 	"permissions":[
         "*://*.meituan.com/*",
         "webRequest",
-        "webRequestBlocking"
+        "webRequestBlocking",
+        "tabs"
 	]
 }
