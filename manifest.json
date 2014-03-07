@@ -1,0 +1,28 @@
+{
+	"name":"美团JSdubug开关插件",
+	"version":"0.2.0",
+	"manifest_version":2,
+
+	"icons":{
+		"16":"icon.png",
+		"48":"icon.png",
+		"128":"icon.png"
+	},
+	"description":"方便的对美团各个页面开启JSdebug",
+
+	"background":{
+		"scripts":[
+			"bg.js"
+		]
+	},
+	"browser_action":{
+		"default_title":"mtJsSwitch"
+		"default_icon":"icon.png",
+	},
+	"offline_enabled":false,
+	"permissions":[
+        "*://*.meituan.com/*",
+        "webRequest",
+        "webRequestBlocking"
+	]
+}
