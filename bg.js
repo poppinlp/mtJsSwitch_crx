@@ -12,10 +12,3 @@ chrome.webRequest.onBeforeRequest.addListener(
     },
     ["blocking"]
 );
-
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    console.log(tab);
-    chrome.tabs.executeScript(tabId, {
-        file: "alert.js"
-    });
-});

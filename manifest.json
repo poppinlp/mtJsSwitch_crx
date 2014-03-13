@@ -1,27 +1,36 @@
 {
-	"name":"美团JSdebug开关插件",
+	"name":"美团前端调试小助手",
 	"version":"0.0.1",
 	"manifest_version":2,
-
 	"icons":{
 		"16":"icon.png",
 		"48":"icon.png",
 		"128":"icon.png"
 	},
-	"description":"方便的对美团各个页面开启JSdebug",
-
-	"background":{
-		"scripts":[
-			"bg.js"
-		]
-	},
+	"description":"方便的对美团各个页面开启jsdebug和phpDebugger",
 	"browser_action":{
-		"default_title":"mtJsSwitch",
+		"default_title":"美团前端调试小助手",
 		"default_icon":"icon.png"
 	},
 	"offline_enabled":false,
+    "background":{
+        "scripts":[
+            "js/bg.js"
+        ]
+    },
+    "content_scripts":[{
+        "matches":[
+            "*://*.meituan.com/*"
+        ],
+        "css":[
+        ],
+        "js":[
+            "content.js"
+        ]
+    }],
 	"permissions":[
         "*://*.meituan.com/*",
+        "*://*.dev.sankuai.com/*",
         "webRequest",
         "webRequestBlocking",
         "tabs"
