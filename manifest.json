@@ -15,18 +15,18 @@
 	"offline_enabled":false,
     "background":{
         "scripts":[
-            "js/bg.js"
+            "bg.js"
         ]
     },
     "content_scripts":[{
         "matches":[
             "*://*.meituan.com/*"
         ],
-        "css":[
-        ],
         "js":[
+            "jquery.js",
             "content.js"
-        ]
+        ],
+        "run_at":"document_start"
     }],
 	"permissions":[
         "*://*.meituan.com/*",

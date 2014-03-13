@@ -1,4 +1,6 @@
 var url = window.location.href;
 if (url.indexOf('test') === -1) {
-    window.onerror = function () { alert('jserror'); };
+    $(window).error(function() {
+        alert('Javascript error');
+    });
 }
