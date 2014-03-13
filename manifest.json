@@ -10,7 +10,8 @@
 	"description":"方便的对美团各个页面开启jsdebug和phpDebugger",
 	"browser_action":{
 		"default_title":"美团前端调试小助手",
-		"default_icon":"icon.png"
+		"default_icon":"icon.png",
+        "default_popup":"popup.html"
 	},
 	"offline_enabled":false,
     "background":{
