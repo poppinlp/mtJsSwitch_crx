@@ -1,7 +1,8 @@
 ##mtJsSwitch\_crx
 
-美团网主站JSDEBUG开关chrome插件
+前端调试小助手chrome插件
 
-- 基本功能完成
-- 添加报错提示
-- 添加开关功能
+- 自动添加jsdebug和phpdebug参数。其中jsdebug只添加在对非test环境的美团页面的请求（其他请求不添加）上；phpdebug只添加在线下环境和test环境的美团页面的请求上。
+- 通过开关控制。开关的状态记录在插件的storage中。
+- 修改onerror事件为alert方便发现错误。
+- 支持白名单。添加参数的时候会忽略白名单中的URL。
