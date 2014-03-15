@@ -1,5 +1,8 @@
-var url = window.location.href;
-// chrome和safari会忽略window.onerror，所以用了jquery来绑这个事件
-$(window).error(function() {
-    alert('Javascript error');
+chrome.extension.connect();
+chrome.extension.onConnect.addListener(function (msg) {
+    if (msg.name === 'true') {
+        $(window).error(function() {
+            alert('Javascript error');
+        });
+    }
 });

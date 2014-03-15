@@ -1,13 +1,18 @@
-var jsSwitch, phpSwitch;
+var jsSwitch, phpSwitch, whiteList, alertSwitch;
 chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php'], function (obj) {
     jsSwitch = obj.mtFESwitch_js ? obj.mtFESwitch_js : true;
     phpSwitch = obj.mtFESwitch_php ? obj.mtFESwitch_php : true;
+    alertSwitch = obj.mtFESwitch_alert ? obj.mtFESwitch_alert : true;
+    whiteList = obj.mtFEWhiteList? obj.mtFEWhitelist : [];
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-    console.log(jsSwitch);
-        var url = details.url.toLowerCase();
+        var url = details.url.toLowerCase(), len = whiteList.length;
+        while (len--) {
+            if (whiteList[len].test(url)) return ;
+        }
+
         if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1) {
             url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
         }
@@ -27,3 +32,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     },
     ["blocking"]
 );
+
+chrome.extension.onConnect.addListener(function (msg) {
+    chrome.tabs.connect(msg.sender.tab.id, {name: alertSwitch.toString()});
+});

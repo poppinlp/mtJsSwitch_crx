@@ -5,10 +5,28 @@ $(function () {
     } else {
         $("#btn-js").val('已关闭');
     }
+    if (bg.alertSwitch) {
+        $("#btn-alert").val('已开启');
+    } else {
+        $("#btn-alert").val('已关闭');
+    }
     if (bg.phpSwitch) {
         $("#btn-php").val('已开启');
     } else {
         $("#btn-php").val('已关闭');
+    }
+});
+$("#btn-alert").click(function () {
+    if (bg.alertSwitch) {
+        bg.alertSwitch = false;
+        chrome.storage.sync.set({mtFESwitch_alert: false}, function () {
+            $("#btn-alert").val('已关闭');
+        });
+    } else {
+        bg.alertSwitch = true;
+        chrome.storage.sync.set({mtFESwitch_alert: true}, function () {
+            $("#btn-alert").val('已开启');
+        });
     }
 });
 $("#btn-js").click(function () {
