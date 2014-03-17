@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1) {
             url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
         }
-        if (url.indexOf('phpdebug') === -1 && url.indexOf('test') !== -1) {
+        if (url.indexOf('phpdebug') === -1 && (url.indexOf('test') !== -1 || url.indexOf('dev.sankuai') !== -1)) {
             if (phpSwitch) {
                 url += url.indexOf('?') === -1 ? '?phpdebug=true' : '&phpdebug=true';
             } else {
@@ -27,7 +27,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             redirectUrl: url 
         };
     },{
-        urls: ["*://*.meituan.com/*"],
+        urls: ["*://*.meituan.com/*", "*://*.dev.sankuai.com/*"],
         types: ["main_frame"]
     },
     ["blocking"]
