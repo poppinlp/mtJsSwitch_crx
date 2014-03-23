@@ -1,4 +1,5 @@
-var jsSwitch, phpSwitch, whiteList, alertSwitch;
+var jsSwitch, phpSwitch, whiteList, alertSwitch, selTAb = 'settings';
+
 chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php'], function (obj) {
     jsSwitch = obj.mtFESwitch_js ? obj.mtFESwitch_js : true;
     phpSwitch = obj.mtFESwitch_php ? obj.mtFESwitch_php : true;
@@ -10,9 +11,8 @@ chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url.toLowerCase(), len = whiteList.length;
         while (len--) {
-            if (whiteList[len].test(url)) return ;
+            if (whiteList[len].test(url)) return;
         }
-
         if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1) {
             url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
         }

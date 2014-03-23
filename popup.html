@@ -5,17 +5,29 @@
         <link rel="stylesheet" type="text/css" href="popup.css" />
     </head>
     <body>
-        <label for="btn-js">jsdebug</label>
-        <input type="button" id="btn-js" />
-        <label for="btn-php">phpdebug</label>
-        <input type="button" id="btn-php" />
-        <label for="btn-alert">erroralert</label>
-        <input type="button" id="btn-alert" />
-        <!--
-        <label for="white-list-input">白名单</label>
-        <input type="text" id="white-list-input" />
-        <textarea id="white-list-content"></textarea>
-        -->
+        <ul class="nav">
+            <li><a data-name="settings" href="javascript:void(0)">开关</a></li>
+            <li><a data-name="whitelist" href="javascript:void(0)">白名单</a></li>
+        </ul>
+        <ul class="settings cf">
+            <li>
+                用于控制美团线上环境JSdebug的开关
+                <input type="checkbox" class="btn-js" />
+            </li>
+            <li>
+                用于控制美团测试环境和dev环境的PHPdebug开关
+                <input type="checkbox" class="btn-php" />
+            </li>
+            <li>
+                用于控制页面注入脚本改写JS报错事件的开关
+                <input type="checkbox" class="btn-alert" />
+            </li>
+        </ul>
+        <div class="whitelist">
+            <input type="text" class="whitelist-input" />
+            <ul class="whitelist-content">
+            </ul>
+        </div>
         <script src="jquery.js"></script>
         <script src="popup.js"></script>
     </body>

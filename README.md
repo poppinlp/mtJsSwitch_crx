@@ -11,5 +11,6 @@
 
 - 2014-3-15 添加对于js的alert error的开关
 - 2014-3-17 phpdebug修复对于dev.sankuai的支持
+- 2014-3-24 自定义白名单完工，UI更新
 
 ####TODO
