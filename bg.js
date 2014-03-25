@@ -1,17 +1,29 @@
-var jsSwitch, phpSwitch, whiteList, alertSwitch, selTAb = 'settings';
+var jsSwitch, phpSwitch, whiteList, alertSwitch, selTAb = 'settings',
+    defaultWhitelist = [
+        '^.*?:\\\/\\\/jiudian.meituan.com\\\/.*$',
+        '^.*?:\\\/\\\/www.meituan.com\/acl\/account\/loginsso.*$',
+    ];
 
-chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php'], function (obj) {
+chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 'mtFESwitch_whitelist'], function (obj) {
     jsSwitch = obj.mtFESwitch_js ? obj.mtFESwitch_js : true;
     phpSwitch = obj.mtFESwitch_php ? obj.mtFESwitch_php : true;
     alertSwitch = obj.mtFESwitch_alert ? obj.mtFESwitch_alert : true;
-    whiteList = obj.mtFEWhiteList? obj.mtFEWhitelist : [];
+    if (obj.mtFESwitch_whitelist) {
+        whiteList = obj.mtFESwitch_whitelist;
+    } else {
+        whiteList = defalutWhitelist;
+        chrome.storage.sync.set({mtFESwitch_whitelist: whiteList});
+    }
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-        var url = details.url.toLowerCase(), len = whiteList.length;
+        var url = details.url.toLowerCase(),
+            len = whiteList.length,
+            pattern;
         while (len--) {
-            if (whiteList[len].test(url)) return;
+            pattern = new RegExp(whiteList[len], 'ig');
+            if (pattern.test(url)) return;
         }
         if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1) {
             url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';

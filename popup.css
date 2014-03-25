@@ -1,6 +1,7 @@
 body {
     margin:0;
     width:200px;
+    font-size:12px;
 }
 ul {
     margin:0;
@@ -9,6 +10,16 @@ ul {
 li {
     list-style:none;
     float:left;
+}
+p {
+    margin:0;
+}
+a {
+    text-decoration:none;
+    color:#666;
+}
+a:hover {
+    color:#d14836;
 }
 .cf {
     zoom:1;
@@ -33,7 +44,6 @@ li {
     font-size:14px;
     line-height:30px;
     text-align:center;
-    text-decoration:none;
 }
 .nav a:hover {
     background:#415C76;
@@ -46,7 +56,6 @@ li {
     background:#FFF;
 }
 .settings {
-    font-size:12px;
     padding:5px 15px;
 }
 .settings li {
@@ -65,4 +74,37 @@ li {
     width:14px;
 }
 .whitelist {
+    padding:5px;
+}
+.whitelist-add {
+    color:#999;
+    line-height:24px;
+}
+.whitelist-add input {
+    width:150px;
+    float:left;
+    height:16px;
+    outline:0;
+    margin:0;
+    padding:2px;
+    margin:0;
+}
+.whitelist-add a {
+    float:right;
+}
+.whitelist-content li {
+    margin:5px 0;
+    width:100%;
+}
+.whitelist-content p {
+    word-break:break-all;
+    float:left;
+    width:150px;
+}
+.whitelist-content a {
+    display:none;
+    float:right;
+}
+.whitelist-content li:hover a {
+    display:block;
 }

@@ -1,6 +1,7 @@
 var bg = chrome.extension.getBackgroundPage();
 
 $(function () {
+    var len = bg.whiteList.length, res = '';
     if (bg.jsSwitch) {
         $(".btn-js").attr('checked', 'checked');
     }
@@ -17,6 +18,10 @@ $(function () {
         $('.nav a').eq(1).addClass('active');
         $('.settings').hide();
     }
+    while (len--) {
+        res += '<li><p>' + bg.whiteList[len] + '</p><a data-val="' + bg.whiteList[len] + '" href="javascript:void(0)">删除</a></li>';
+    }
+    $(".whitelist-content").html(res);
 });
 
 $(".btn-alert").click(function () {
@@ -64,4 +69,17 @@ $(".nav").delegate('a', 'click', function () {
         bg.selTab = 'settings';
     }
     $(this).addClass('active');
+});
+$(".whitelist-add a").click(function () {
+    var content = $(".whitelist-input").val();
+    if (content !== '') {
+        bg.whiteList.push(content);
+        $(".whitelist-content").append('<li><p>' + content + '</p><a data-val="' + content + '" href="javascript:void(0)">删除</a></li>');
+        chrome.storage.sync.set({mtFESwitch_whitelist: bg.whiteList});
+    }
+});
+$(".whitelist-content").delegate('a', 'click', function () {
+    $(this).parents('li').hide();
+    bg.whiteList.splice(bg.whiteList.indexOf($(this).data('val')), 1);
+    chrome.storage.sync.set({mtFESwitch_whitelist: bg.whiteList});
 });
