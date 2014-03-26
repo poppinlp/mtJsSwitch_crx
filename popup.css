@@ -59,8 +59,8 @@ a:hover {
     padding:5px 0;
 }
 .settings p {
-    width:160px;
-    padding:0 20px 0 10px;
+    width:150px;
+    padding:0 20px;
     line-height:18px;
 }
 .settings li {
@@ -73,7 +73,7 @@ a:hover {
 }
 .settings input {
     position:absolute;
-    right:-6px;
+    right:5px;
     top:12px;
     height:14px;
     width:14px;

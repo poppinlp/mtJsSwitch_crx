@@ -13,14 +13,16 @@ $(window).keydown(function (e) {
         switch (e.keyCode) {
             case 74: //jsdebug
                 chrome.extension.connect({name: 'changeJsdebug'});
+                window.location.reload();
                 break;
             case 80: //phpdebug
                 chrome.extension.connect({name: 'changePhpdebug'});
+                window.location.reload();
                 break;
             case 65: //jsalert
                 chrome.extension.connect({name: 'changeJsalert'});
+                window.location.reload();
                 break;
         }
-        window.location.reload();
     }
 });
