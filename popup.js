@@ -62,11 +62,13 @@ $(".nav").delegate('a', 'click', function () {
         $('.settings').hide();
         $('.whitelist').show();
         bg.selTab = 'whitelist';
+        chrome.storage.sync.set({mtFESwitch_setTab: 'whitelist'});
     } else {
         $('.nav a').eq(1).removeClass('active')
         $('.whitelist').hide();
         $('.settings').show();
         bg.selTab = 'settings';
+        chrome.storage.sync.set({mtFESwitch_setTab: 'settings'});
     }
     $(this).addClass('active');
 });

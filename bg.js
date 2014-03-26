@@ -1,13 +1,14 @@
-var jsSwitch, phpSwitch, whiteList, alertSwitch, selTAb = 'settings',
+var jsSwitch, phpSwitch, whiteList, alertSwitch, selTab,
     defaultWhitelist = [
         '^.*?:\\\/\\\/jiudian.meituan.com\\\/.*$',
         '^.*?:\\\/\\\/www.meituan.com\/acl\/account\/loginsso.*$',
     ];
 
-chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 'mtFESwitch_whitelist'], function (obj) {
+chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 'mtFESwitch_whitelist', 'mtFESwitch_selTab'], function (obj) {
     jsSwitch = obj.mtFESwitch_js ? obj.mtFESwitch_js : true;
     phpSwitch = obj.mtFESwitch_php ? obj.mtFESwitch_php : true;
     alertSwitch = obj.mtFESwitch_alert ? obj.mtFESwitch_alert : true;
+    selTab = obj.mtFESwitch_selTab ? obj.mtFESwtich_selTab : 'settings';
     if (obj.mtFESwitch_whitelist) {
         whiteList = obj.mtFESwitch_whitelist;
     } else {
@@ -18,6 +19,7 @@ chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+    console.log(details);
         var url = details.url.toLowerCase(),
             len = whiteList.length,
             pattern;
@@ -25,10 +27,10 @@ chrome.webRequest.onBeforeRequest.addListener(
             pattern = new RegExp(whiteList[len], 'ig');
             if (pattern.test(url)) return;
         }
-        if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1) {
+        if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1 && url.indexOf('dev.sankuai.com') === -1) {
             url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
         }
-        if (url.indexOf('phpdebug') === -1 && (url.indexOf('test') !== -1 || url.indexOf('dev.sankuai') !== -1)) {
+        if (url.indexOf('phpdebug') === -1 && (url.indexOf('test') !== -1 || url.indexOf('dev.sankuai.com') !== -1)) {
             if (phpSwitch) {
                 url += url.indexOf('?') === -1 ? '?phpdebug=true' : '&phpdebug=true';
             } else {
