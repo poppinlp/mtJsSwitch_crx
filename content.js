@@ -21,5 +21,6 @@ $(window).keydown(function (e) {
                 chrome.extension.connect({name: 'changeJsalert'});
                 break;
         }
+        window.location.reload();
     }
 });

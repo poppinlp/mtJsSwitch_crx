@@ -12,8 +12,11 @@
 - 2014-3-15 添加对于js的alert error的开关
 - 2014-3-17 phpdebug修复对于dev.sankuai的支持
 - 2014-3-24 自定义白名单完工，UI更新
+- 2014-3-26
+- - 支持键盘快捷键，ctrl+j、ctrl+p、ctrl+a分别对应jsdebug、phpdebug、alerterror
+- - 快捷键更改状态时页面自动刷新
+- - 更新参数存在url中时的处理方式
 
 ####TODO
 
-- 支持快捷键
 - 忽略网页中的插件报错

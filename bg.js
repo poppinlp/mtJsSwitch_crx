@@ -21,21 +21,72 @@ chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url.toLowerCase(),
             len = whiteList.length,
-            pattern;
+            pattern, index, index2;
+
+        // whitelist
         while (len--) {
             pattern = new RegExp(whiteList[len], 'ig');
             if (pattern.test(url)) return;
         }
-        if (jsSwitch && url.indexOf('jsdebug') === -1 && url.indexOf('test') === -1 && url.indexOf('dev.sankuai.com') === -1) {
-            url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
-        }
-        if (url.indexOf('phpdebug') === -1 && (url.indexOf('test') !== -1 || url.indexOf('dev.sankuai.com') !== -1)) {
-            if (phpSwitch) {
-                url += url.indexOf('?') === -1 ? '?phpdebug=true' : '&phpdebug=true';
+
+        // jsdebug
+        if (url.indexOf('test') === -1 && url.indexOf('dev.sankuai.com') === -1) {
+            index = url.indexOf('jsdebug');
+            if (jsSwitch) {
+                if (index === -1) {
+                    url += url.indexOf('?') === -1 ? '?jsdebug=true' : '&jsdebug=true';
+                } else {
+                    pattern = /.*?jsdebug=.*?&.*/gi;
+                    if (pattern.test(url)) {
+                        index2 = (url.slice(index)).indexOf('&');
+                        url = url.slice(0, index) + 'jsdebug=true' + url.slice(index2 + index);
+                    } else {
+                        url = url.slice(0, index) + 'jsdebug=true';
+                    }
+                }
             } else {
-                url += url.indexOf('?') === -1 ? '?phpdebug=false' : '&phpdebug=false';
+                if (index !== -1) {
+                    pattern = /.*?jsdebug=.*?&.*/gi;
+                    if (pattern.test(url)) {
+                        index2 = (url.slice(index)).indexOf('&');
+                        url = url.slice(0, index) + url.slice(index2 + index + 1);
+                    } else {
+                        url = url.slice(0, index - 1);
+                    }
+                }
             }
         }
+
+        // phpdebug
+        if (url.indexOf('test') !== -1 || url.indexOf('dev.sankuai.com') !== -1) {
+            index = url.indexOf('phpdebug');
+            if (phpSwitch) {
+                if (index === -1) {
+                    url += url.indexOf('?') === -1 ? '?phpdebug=true' : '&phpdebug=true';
+                } else {
+                    pattern = /.*?phpdebug=.*?&.*/gi;
+                    if (pattern.test(url)) {
+                        index2 = (url.slice(index)).indexOf('&');
+                        url = url.slice(0, index) + 'phpdebug=true' + url.slice(index2 + index);
+                    } else {
+                        url = url.slice(0, index) + 'phpdebug=true';
+                    }
+                }
+            } else {
+                if (index === -1) {
+                    url += url.indexOf('?') === -1 ? '?phpdebug=false' : '&phpdebug=false';
+                } else {
+                    pattern = /.*?phpdebug=.*?&.*/gi;
+                    if (pattern.test(url)) {
+                        index2 = (url.slice(index)).indexOf('&');
+                        url = url.slice(0, index) + 'phpdebug=false' + url.slice(index2 + index);
+                    } else {
+                        url = url.slice(0, index) + 'phpdebug=false';
+                    }
+                }
+            }
+        }
+
         return {
             redirectUrl: url 
         };
