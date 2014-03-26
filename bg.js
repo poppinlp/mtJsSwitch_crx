@@ -19,7 +19,6 @@ chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-    console.log(details);
         var url = details.url.toLowerCase(),
             len = whiteList.length,
             pattern;
@@ -48,5 +47,21 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 chrome.extension.onConnect.addListener(function (msg) {
-    chrome.tabs.connect(msg.sender.tab.id, {name: alertSwitch.toString()});
+    switch (msg.name) {
+        case 'isJsAlertOpen':
+            chrome.tabs.connect(msg.sender.tab.id, {name: alertSwitch.toString()});
+            break;
+        case 'changeJsdebug':
+            jsSwitch = !jsSwitch;
+            chrome.storage.sync.set({mtFESwitch_js: jsSwitch});
+            break;
+        case 'changePhpdebug':
+            phpSwitch = !phpSwitch;
+            chrome.storage.sync.set({mtFESwitch_php: phpSwitch});
+            break;
+        case 'changeJsalert':
+            alertSwitch = !alertSwitch;
+            chrome.storage.sync.set({mtFESwitch_alert: alertSwitch});
+            break;
+    }
 });

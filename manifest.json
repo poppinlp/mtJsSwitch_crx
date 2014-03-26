@@ -21,7 +21,8 @@
     },
     "content_scripts":[{
         "matches":[
-            "*://*.meituan.com/*"
+            "*://*.meituan.com/*",
+            "*://*.dev.sankuai.com/*"
         ],
         "js":[
             "jquery.js",
