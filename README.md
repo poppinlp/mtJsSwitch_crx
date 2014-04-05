@@ -16,6 +16,7 @@
 - - 支持键盘快捷键，ctrl+j、ctrl+p、ctrl+a分别对应jsdebug、phpdebug、alerterror
 - - 快捷键更改状态时页面自动刷新
 - - 更新参数存在url中时的处理方式
+- 2013-4-5 储存方式由chrome.storage换成localStorage
 
 ####TODO
 

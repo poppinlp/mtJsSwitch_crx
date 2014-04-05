@@ -4,18 +4,16 @@ var jsSwitch, phpSwitch, whiteList, alertSwitch, selTab,
         '^.*?:\\\/\\\/www.meituan.com\/acl\/account\/loginsso.*$',
     ];
 
-chrome.storage.sync.get(['mtFESwitch_js', 'mtFESwitch_php', 'mtFESwitch_alert', 'mtFESwitch_whitelist', 'mtFESwitch_selTab'], function (obj) {
-    jsSwitch = obj.mtFESwitch_js ? obj.mtFESwitch_js : true;
-    phpSwitch = obj.mtFESwitch_php ? obj.mtFESwitch_php : true;
-    alertSwitch = obj.mtFESwitch_alert ? obj.mtFESwitch_alert : true;
-    selTab = obj.mtFESwitch_selTab ? obj.mtFESwtich_selTab : 'settings';
-    if (obj.mtFESwitch_whitelist) {
-        whiteList = obj.mtFESwitch_whitelist;
-    } else {
-        whiteList = defalutWhitelist;
-        chrome.storage.sync.set({mtFESwitch_whitelist: whiteList});
-    }
-});
+jsSwitch = localStorage.mtFESwitch_js ? localStorage.mtFESwitch_js : true;
+phpSwitch = localStorage.mtFESwitch_php ? localStorage.mtFESwitch_php : true;
+alertSwitch = localStorage.mtFESwitch_alert ? localStorage.mtFESwitch_alert : true;
+selTab = localStorage.mtFESwitch_selTab ? localStorage.mtFESwtich_selTab : 'settings';
+if (localStorage.mtFESwitch_whitelist) {
+    whiteList = localStorage.mtFESwitch_whitelist;
+} else {
+    whiteList = defaultWhitelist;
+    localStorage.setItem('mtFESwitch_whiteList', whiteList);
+}
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
@@ -104,15 +102,17 @@ chrome.extension.onConnect.addListener(function (msg) {
             break;
         case 'changeJsdebug':
             jsSwitch = !jsSwitch;
-            chrome.storage.sync.set({mtFESwitch_js: jsSwitch});
+            localStorage.setItem('mtFESwitch_js', jsSwitch);
             break;
         case 'changePhpdebug':
             phpSwitch = !phpSwitch;
-            chrome.storage.sync.set({mtFESwitch_php: phpSwitch});
+            localStorage.setItem('mtFESwitch_php', phpSwitch);
             break;
         case 'changeJsalert':
             alertSwitch = !alertSwitch;
-            chrome.storage.sync.set({mtFESwitch_alert: alertSwitch});
+            localStorage.setItem('mtFESwitch_alert', alertSwitch);
             break;
     }
 });
+
+

@@ -35,7 +35,6 @@
         "*://*.dev.sankuai.com/*",
         "webRequest",
         "webRequestBlocking",
-        "tabs",
-        "storage"
+        "tabs"
 	]
 }
