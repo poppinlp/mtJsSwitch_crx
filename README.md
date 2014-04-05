@@ -13,9 +13,9 @@
 - 2014-3-17 phpdebug修复对于dev.sankuai的支持
 - 2014-3-24 自定义白名单完工，UI更新
 - 2014-3-26
-- - 支持键盘快捷键，ctrl+j、ctrl+p、ctrl+a分别对应jsdebug、phpdebug、alerterror
-- - 快捷键更改状态时页面自动刷新
-- - 更新参数存在url中时的处理方式
+  - 支持键盘快捷键，ctrl+j、ctrl+p、ctrl+a分别对应jsdebug、phpdebug、alerterror
+  - 快捷键更改状态时页面自动刷新
+  - 更新参数存在url中时的处理方式
 - 2013-4-5 储存方式由chrome.storage换成localStorage
 
 ####TODO
