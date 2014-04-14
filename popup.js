@@ -2,13 +2,13 @@ var bg = chrome.extension.getBackgroundPage();
 
 $(function () {
     var len = bg.whiteList.length, res = '';
-    if (bg.jsSwitch != 'false') {
+    if (bg.jsSwitch !== 'false') {
         $(".btn-js").attr('checked', 'checked');
     }
-    if (bg.alertSwitch != 'false') {
+    if (bg.alertSwitch !== 'false') {
         $(".btn-alert").attr('checked', 'checked');
     }
-    if (bg.phpSwitch != 'false') {
+    if (bg.phpSwitch !== 'false') {
         $(".btn-php").attr('checked', 'checked');
     }
     if (bg.selTab === 'settings') {
@@ -25,32 +25,32 @@ $(function () {
 });
 
 $(".btn-alert").click(function () {
-    if (bg.alertSwitch) {
-        bg.alertSwitch = false;
-        localStorage.setItem('mtFESwitch_alert', false);
+    if (bg.alertSwitch === 'true') {
+        bg.alertSwitch = 'false';
+        localStorage.setItem('mtFESwitch_alert', 'false');
     } else {
-        bg.alertSwitch = true;
-        localStorage.setItem('mtFESwitch_alert', true);
+        bg.alertSwitch = 'true';
+        localStorage.setItem('mtFESwitch_alert', 'true');
     }
 });
 
 $(".btn-js").click(function () {
-    if (bg.jsSwitch) {
-        bg.jsSwitch = false;
-        localStorage.setItem('mtFESwitch_js', false);
+    if (bg.jsSwitch === 'true') {
+        bg.jsSwitch = 'false';
+        localStorage.setItem('mtFESwitch_js', 'false');
     } else {
-        bg.jsSwitch = true;
-        localStorage.setItem('mtFESwitch_js', true);
+        bg.jsSwitch = 'true';
+        localStorage.setItem('mtFESwitch_js', 'true');
     }
 });
 
 $(".btn-php").click(function () {
-    if (bg.phpSwitch) {
-        bg.phpSwitch = false;
-        localStorage.setItem('mtFESwitch_php', false);
+    if (bg.phpSwitch === 'true') {
+        bg.phpSwitch = 'false';
+        localStorage.setItem('mtFESwitch_php', 'false');
     } else {
-        bg.phpSwitch = true;
-        localStorage.setItem('mtFESwitch_php', true);
+        bg.phpSwitch = 'true';
+        localStorage.setItem('mtFESwitch_php', 'true');
     }
 });
 

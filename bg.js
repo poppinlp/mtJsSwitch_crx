@@ -4,15 +4,15 @@ var jsSwitch, phpSwitch, whiteList, alertSwitch, selTab,
         '^.*?:\\\/\\\/www.meituan.com\/acl\/account\/loginsso.*$',
     ];
 
-jsSwitch = localStorage.mtFESwitch_js ? localStorage.mtFESwitch_js : true;
-phpSwitch = localStorage.mtFESwitch_php ? localStorage.mtFESwitch_php : true;
-alertSwitch = localStorage.mtFESwitch_alert ? localStorage.mtFESwitch_alert : true;
+jsSwitch = localStorage.mtFESwitch_js ? localStorage.mtFESwitch_js : 'true';
+phpSwitch = localStorage.mtFESwitch_php ? localStorage.mtFESwitch_php : 'true';
+alertSwitch = localStorage.mtFESwitch_alert ? localStorage.mtFESwitch_alert : 'true';
 selTab = localStorage.mtFESwitch_selTab ? localStorage.mtFESwtich_selTab : 'settings';
 if (localStorage.mtFESwitch_whitelist) {
     whiteList = localStorage.mtFESwitch_whitelist;
 } else {
     whiteList = defaultWhitelist;
-    localStorage.setItem('mtFESwitch_whiteList', whiteList);
+    localStorage.setItem('mtFESwitch_whitelist', whiteList);
 }
 
 chrome.webRequest.onBeforeRequest.addListener(
